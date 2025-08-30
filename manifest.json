@@ -2,10 +2,14 @@
   "manifest_version": 3,
   "name": "Cyrillic URL Detector",
   "version": "1.0",
-  "description": "Detects Cyrillic characters in URLs to prevent IDN homograph attacks and protect against phishing",
+  "description": "Detects Cyrillic characters in URLs and page content to prevent IDN homograph attacks.",
   "permissions": [
     "activeTab",
     "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "file:///*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -21,13 +25,9 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "run_at": "document_end"
+      "matches": ["<all_urls>", "file:///*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
     }
   ],
   "icons": {

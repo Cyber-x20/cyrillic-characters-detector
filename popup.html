@@ -1,77 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyrillic URL Detector</title>
-    <link rel="stylesheet" href="popup.css">
+  <meta charset="UTF-8" />
+  <title>Cyrillic URL Detector</title>
+  <style>
+    body { font-family: Arial, sans-serif; width: 320px; padding: 12px; }
+    .status { margin-bottom: 15px; padding: 10px; border-radius: 4px; }
+    .safe { background-color: #d4edda; color: #155724; }
+    .danger { background-color: #f8d7da; color: #721c24; }
+    .warning { background-color: #fff3cd; color: #856404; }
+    #cyrillic-details.hidden, #safe-message.hidden { display: none; }
+    button { background-color: #007bff; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; width: 100%; }
+    button:hover { background-color: #0056b3; }
+  </style>
 </head>
 <body>
-    <div class="popup">
-        <header class="header">
-            <h1>🛡️ Cyrillic URL Detector</h1>
-            <p class="subtitle">Security Analysis</p>
-        </header>
+  <h2>Cyrillic URL Detector</h2>
+  <div id="status" class="status safe">
+    <span id="status-icon">✅</span>
+    <span id="status-text">URL appears safe</span>
+  </div>
 
-        <main class="content">
-            <div id="loading" class="loading hidden">
-                <div class="spinner"></div>
-                <p>Analyzing current page...</p>
-            </div>
+  <div>
+    <strong>Current URL:</strong>
+    <pre id="current-url" style="background:#f1f1f1; padding:8px; border-radius:4px; overflow-x:auto;"></pre>
+  </div>
 
-            <div id="results" class="results hidden">
-                <div id="status" class="status">
-                    <div id="status-icon" class="status-icon"></div>
-                    <div id="status-text" class="status-text"></div>
-                </div>
+  <div id="cyrillic-details" class="hidden">
+    <h3>Detection Details</h3>
+    <div id="cyrillic-list"></div>
+  </div>
 
-                <div class="url-info">
-                    <h3>Current URL:</h3>
-                    <div id="current-url" class="url-display"></div>
-                </div>
+  <div id="safe-message">
+    <p>No Cyrillic characters detected that could indicate homograph attacks.</p>
+  </div>
 
-                <div id="cyrillic-details" class="cyrillic-details hidden">
-                    <h3>⚠️ Cyrillic Characters Detected:</h3>
-                    <div id="cyrillic-list" class="cyrillic-list"></div>
+  <button id="refresh-btn">Refresh Analysis</button>
 
-                    <div class="warning">
-                        <h4>⚠️ Security Warning</h4>
-                        <p>This URL contains Cyrillic characters that may be used in <strong>IDN homograph attacks</strong> to mimic legitimate websites.</p>
-                        <ul>
-                            <li>Verify this is the correct website</li>
-                            <li>Check for official certificates</li>
-                            <li>Be cautious entering sensitive information</li>
-                        </ul>
-                    </div>
-                </div>
+  <div style="margin-top: 20px; font-size: 0.9em; color: #555;">
+    <h4>About IDN Homograph Attacks</h4>
+    <p>
+      Attackers use look-alike characters from different alphabets (like Cyrillic) to create fake domains that appear identical to legitimate sites.
+    </p>
+    <a href="https://en.wikipedia.org/wiki/IDN_homograph_attack" target="_blank" rel="noopener">Examples of dangerous look-alikes</a>
+  </div>
 
-                <div id="safe-message" class="safe-message hidden">
-                    <h3>✅ URL appears safe</h3>
-                    <p>No Cyrillic characters detected that could indicate homograph attacks.</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <h3>About IDN Homograph Attacks</h3>
-                <p>Attackers use look-alike characters from different alphabets (like Cyrillic) to create fake domains that appear identical to legitimate sites.</p>
-
-                <details class="examples">
-                    <summary>Examples of dangerous look-alikes:</summary>
-                    <ul>
-                        <li><code>а</code> (Cyrillic) vs <code>a</code> (Latin)</li>
-                        <li><code>е</code> (Cyrillic) vs <code>e</code> (Latin)</li>
-                        <li><code>о</code> (Cyrillic) vs <code>o</code> (Latin)</li>
-                        <li><code>р</code> (Cyrillic) vs <code>p</code> (Latin)</li>
-                    </ul>
-                </details>
-            </div>
-        </main>
-
-        <footer class="footer">
-            <button id="refresh-btn" class="btn">🔄 Refresh Analysis</button>
-        </footer>
-    </div>
-
-    <script src="popup.js"></script>
+  <script src="popup.js"></script>
 </body>
 </html>
