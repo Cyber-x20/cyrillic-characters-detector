@@ -1,4 +1,4 @@
-# Cyrillic URL Detector Chrome Extension
+# Cyrillic Character Detector Chrome Extension
 
 A security-focused Chrome extension that detects Cyrillic characters in URLs to help prevent IDN homograph attacks.
 
@@ -12,19 +12,13 @@ A security-focused Chrome extension that detects Cyrillic characters in URLs to 
 
 ## Installation
 
-### Method 1: Developer Mode (Recommended)
+### Developer Mode (Recommended)
 
 1. **Download the extension files** to a folder on your computer
 2. **Open Chrome** and navigate to `chrome://extensions/`
 3. **Enable Developer Mode** (toggle in top-right corner)
 4. **Click "Load unpacked"** and select the extension folder
 5. **Pin the extension** to your toolbar for easy access
-
-### Method 2: Pack and Install
-
-1. In `chrome://extensions/`, click **"Pack extension"**
-2. Select the extension folder and create a `.crx` file
-3. Drag the `.crx` file to the Chrome extensions page
 
 ## Usage
 
